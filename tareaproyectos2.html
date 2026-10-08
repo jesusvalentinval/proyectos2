@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gobernanza de Proyectos | Ampliación Nueva Rinconada Frente 2</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800 antialiased">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-72 bg-slate-900 text-white flex flex-col justify-between shadow-xl shrink-0 z-10 text-ellipsis overflow-x-hidden">
+            <div>
+                <div class="p-5 border-b border-slate-800 bg-slate-950 flex items-center gap-3">
+                    <div class="p-2 bg-blue-600/20 text-blue-400 rounded-lg">
+                        <i class="fa-solid fa-water text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-black text-xs tracking-wide text-white">PROYECTO SANEAMIENTO</h1>
+                        <span class="text-xs text-slate-400 font-medium">Maestría Project Management</span>
+                    </div>
+                </div>
+
+                <nav class="mt-4 px-3 space-y-1 overflow-y-auto max-h-[calc(100vh-180px)]">
+                    <button onclick="switchTab('resumen')" id="btn-resumen" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md">
+                        <i class="fa-solid fa-file-invoice w-4 text-center"></i> 1. Resumen y Contexto
+                    </button>
+                    
+                    <button onclick="switchTab('cambios')" id="btn-cambios" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 text-xs font-medium rounded-xl transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                        <i class="fa-solid fa-code-merge w-4 text-center"></i> 2. Control de Cambios (CCB)
+                    </button>
+                    
+                    <button onclick="switchTab('calidad')" id="btn-calidad" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 text-xs font-medium rounded-xl transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                        <i class="fa-solid fa-award w-4 text-center"></i> 3. Aseguramiento de Calidad
+                    </button>
+                    
+                    <button onclick="switchTab('conocimiento')" id="btn-conocimiento" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 text-xs font-medium rounded-xl transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                        <i class="fa-solid fa-brain w-4 text-center"></i> 4. Conocimiento e Integración IA
+                    </button>
+                    
+                    <button onclick="switchTab('adaptacion')" id="btn-adaptacion" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 text-xs font-medium rounded-xl transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                        <i class="fa-solid fa-sliders w-4 text-center"></i> 5. Tailoring (Adaptación)
+                    </button>
+
+                    <button onclick="switchTab('mapamental')" id="btn-mapamental" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 text-xs font-medium rounded-xl transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+                        <i class="fa-solid fa-sitemap w-4 text-center"></i> 6. Mapa Mental Gobernanza
+                    </button>
+                </nav>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-950/60 text-xs space-y-1.5 text-slate-400">
+                <p><span class="font-bold text-slate-300">Entidad:</span> SEDAPAL / MVCS</p>
+                <p><span class="font-bold text-slate-300">Ejecutor:</span> Consorcio San Miguel</p>
+                <p class="pt-2 text-[10px] text-slate-500 border-t border-slate-800/60"><i class="fa-solid fa-location-dot text-blue-400 mr-1"></i>SJM - VMT - VES (Etapa 1)</p>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-8 shrink-0 shadow-xs">
+                <div class="flex items-center gap-3">
+                    <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
+                        <span class="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span> Fase: Ejecución y Control
+                    </span>
+                    <span class="text-slate-300">|</span>
+                    <p class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-diagram-project mr-1"></i> Gobernanza de Proyectos II</p>
+                </div>
+                <div class="text-xs font-bold text-slate-400 tracking-wider uppercase">
+                    Nueva Rinconada - Frente 2
+                </div>
+            </header>
+
+            <main class="p-8 max-w-[1400px] w-full mx-auto space-y-8">
+
+                <!-- TAB 1: RESUMEN -->
+                <div id="tab-resumen" class="tab-content active space-y-6">
+                    <div class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-8 rounded-2xl shadow-lg border border-slate-800 text-white">
+                        <span class="text-blue-400 text-xs uppercase font-black tracking-widest">Trabajo Integrador - Sesión 1</span>
+                        <h2 class="text-2xl font-black mt-1">Ampliación y Mejoramiento de Sistemas de Agua Potable y Alcantarillado</h2>
+                        <p class="mt-3 text-slate-300 leading-relaxed max-w-4xl text-sm">
+                            Esquema Nueva Rinconada (Etapa 1, Frente 2) en los distritos de <span class="text-blue-400 font-semibold">San Juan de Miraflores, Villa María del Triunfo y Villa El Salvador</span>. El proyecto optimiza la infraestructura sanitaria instalando redes primarias y secundarias[cite: 24, 25].
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Inversión Base (Línea Costo)</p>
+                                <h3 class="text-xl font-black mt-1 text-slate-900">S/. 2,143,041,372</h3>
+                                <span class="text-[11px] text-slate-500 mt-1 block">Presupuesto total integrado (EDT)</span>
+                            </div>
+                            <div class="p-4 bg-blue-50 text-blue-600 rounded-xl text-xl"><i class="fa-solid fa-coins"></i></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Plazo de Ejecución</p>
+                                <h3 class="text-2xl font-black mt-1 text-slate-900">1,260 Días</h3>
+                                <span class="text-[11px] text-emerald-600 font-semibold mt-1 block"><i class="fa-solid fa-calendar-days"></i> 2023 al 2027</span>
+                            </div>
+                            <div class="p-4 bg-emerald-50 text-emerald-600 rounded-xl text-xl"><i class="fa-solid fa-clock"></i></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Población Beneficiaria</p>
+                                <h3 class="text-2xl font-black mt-1 text-slate-900">150,000 Hab.</h3>
+                                <span class="text-[11px] text-slate-500 mt-1 block">Reservorio RRP-04 (20,000 m³)</span>
+                            </div>
+                            <div class="p-4 bg-purple-50 text-purple-600 rounded-xl text-xl"><i class="fa-solid fa-users"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Distribución Financiera por Paquetes Principales</h3>
+                        <div class="h-64">
+                            <canvas id="chartFinanzas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: CONTROL DE CAMBIOS -->
+                <div id="tab-cambios" class="tab-content space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-shuffle text-blue-500"></i> Paso 1: Control Integrado de Cambios (CCB)
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Definición del Comité de Control de Cambios (CCB) y flujo para procesar variaciones en un entorno predictivo de gran envergadura (Saneamiento).
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs lg:col-span-1 space-y-4">
+                            <h3 class="font-bold text-sm text-slate-400 uppercase tracking-wider">Composición del CCB</h3>
+                            
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded">Entidad / Financiamiento</span>
+                                <h4 class="font-bold text-slate-800 text-xs mt-1">Representante de SEDAPAL / MVCS</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5">Aprueba cambios estructurales mayores de presupuesto y alcance.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Supervisión Técnica</span>
+                                <h4 class="font-bold text-slate-800 text-xs mt-1">Consorcio Supervisor Nueva Rinconada</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5">Valida la viabilidad técnica y normativa de los cambios en campo.</p>
+                            </div>
+
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">Ejecución</span>
+                                <h4 class="font-bold text-slate-800 text-xs mt-1">Gerente de Proyecto / Residente (Consorcio San Miguel)</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5">Presenta y sustenta los impactos en cronograma y costos.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs lg:col-span-2 space-y-4">
+                            <h3 class="font-bold text-slate-900 text-base"><i class="fa-solid fa-sliders text-purple-500 mr-2"></i>Simulador de Umbrales de Cambio</h3>
+                            <p class="text-xs text-slate-400">Prueba cómo se evalúa una solicitud de cambio según el impacto monetario estimado en la obra.</p>
+                            
+                            <div class="space-y-4 pt-2">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Descripción del Cambio en Campo</label>
+                                    <input type="text" value="Modificación de trazo por interferencias de redes eléctricas no mapeadas en SJM" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Costo Estimado del Cambio (S/.)</label>
+                                    <input type="number" id="montoCambioInput" oninput="calcularFlujoCambio()" value="150000" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-900 focus:outline-blue-500">
+                                </div>
+                            </div>
+
+                            <div id="boxRespuestaCambio" class="p-5 rounded-xl transition-all duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: CALIDAD -->
+                <div id="tab-calidad" class="tab-content space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-check-double text-emerald-500"></i> Paso 2: Aseguramiento de la Calidad (QA)
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Herramientas orientadas a la prevención de defectos en la instalación de tuberías de hierro dúctil, zanjas y reservorios.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-5 border border-slate-200 rounded-xl shadow-xs space-y-2">
+                            <div class="h-10 w-10 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-lg font-bold"><i class="fa-solid fa-list-check"></i></div>
+                            <h3 class="font-bold text-slate-900 text-sm">Listas de Verificación (Checklists)</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Validación previa de entibados en zanjas profundas, compactación de base y control dimensional antes del emboquillado de tuberías.
+                            </p>
+                        </div>
+                        <div class="bg-white p-5 border border-slate-200 rounded-xl shadow-xs space-y-2">
+                            <div class="h-10 w-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-lg font-bold"><i class="fa-solid fa-file-shield"></i></div>
+                            <h3 class="font-bold text-slate-900 text-sm">Auditorías de Procesos Constructivos</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Revisiones conjuntas con el Consorcio Supervisor para asegurar cumplimiento de especificaciones técnicas y normativas de SEDAPAL.
+                            </p>
+                        </div>
+                        <div class="bg-white p-5 border border-slate-200 rounded-xl shadow-xs space-y-2">
+                            <div class="h-10 w-10 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center text-lg font-bold"><i class="fa-solid fa-diagram-project"></i></div>
+                            <h3 class="font-bold text-slate-900 text-sm">Diagrama Causa-Efecto (Ishikawa)</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Aplicado ante fallas en pruebas hidráulicas o de resistencia a la compresión del concreto para hallar la causa raíz inmediata.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: CONOCIMIENTO + IA -->
+                <div id="tab-conocimiento" class="tab-content space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-amber-500"></i> Paso 3: Gestión del Conocimiento y Uso de IA
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Estrategia de captura de conocimiento tácito/explícito e integración práctica de Inteligencia Artificial como herramienta de aumento (*augmentation*).
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <h3 class="font-bold text-slate-900 text-base border-b border-slate-100 pb-2"><i class="fa-solid fa-users text-blue-500 mr-2"></i>Captura de Conocimiento</h3>
+                            <ul class="space-y-2 text-xs text-slate-600">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                    <div><strong>Registro Continuo de Lecciones Aprendidas:</strong> Alimentado por los riesgos materializados en campo (ej. interferencias imprevistas o retrasos municipales).</div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                    <div><strong>Reuniones de Retrospectiva:</strong> Talleres periódicos con frentes de trabajo para evaluar qué falló en la ejecución de zanjas y cómo optimizar el rendimiento.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <h3 class="font-bold text-slate-900 text-base border-b border-slate-100 pb-2"><i class="fa-solid fa-robot text-purple-500 mr-2"></i>Aplicación Práctica de IA</h3>
+                            <ul class="space-y-2 text-xs text-slate-600">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                    <div><strong>Transcripción y Resumen Automático:</strong> Uso de modelos de lenguaje (LLM) para procesar minutas de reuniones de coordinación con las municipalidades de SJM, VMT y VES.</div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                    <div><strong>Análisis Predictivo de Riesgos:</strong> Identificación automatizada de desviaciones en la ruta crítica comparando avances diarios con el cronograma base.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: ADAPTACIÓN (TAILORING) -->
+                <div id="tab-adaptacion" class="tab-content space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-purple-500"></i> Paso 4: La Adaptación (Tailoring)
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Justificación de la adaptación del marco de gobernanza a la complejidad y contexto del proyecto de infraestructura de saneamiento.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-sm mb-1">Contexto Multisectorial</h4>
+                                <p class="text-xs text-slate-600">Al intervenir en tres distritos urbanos complejos (SJM, VMT, VES), la gobernanza combina un núcleo predictivo estricto para la obra física con flexibilidad táctica para mediar con autoridades locales.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-sm mb-1">Control Regulatorio</h4>
+                                <p class="text-xs text-slate-600">Alta supervisión de la Contraloría General de la República y SEDAPAL, exigiendo trazabilidad documental rigurosa en cada valorización y partida ejecutada.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h4 class="font-bold text-slate-900 text-sm mb-1">Mejora Continua</h4>
+                                <p class="text-xs text-slate-600">Adaptación mediante puertas de fase (*Phase Gates*) y ciclos de retroalimentación para ajustar cuadrillas y recursos ante hallazgos geotécnicos imprevistos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 6: MAPA MENTAL -->
+                <div id="tab-mapamental" class="tab-content space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-sitemap text-blue-600"></i> Mapa Mental del Marco de Gobernanza
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Esquema estructural de la gobernanza aplicada a la Ejecución y Monitoreo del Frente 2.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-xs overflow-x-auto">
+                        <div class="min-w-[800px] flex flex-col items-center py-4">
+                            <div class="bg-blue-900 text-white font-black text-center px-6 py-4 rounded-2xl shadow-md border-2 border-blue-950 max-w-sm mb-10">
+                                <p class="text-xs uppercase text-blue-300 tracking-widest">Proyecto Nueva Rinconada</p>
+                                <p class="text-sm mt-0.5">GOBERNANZA: EJECUCIÓN Y CONTROL</p>
+                            </div>
+
+                            <div class="grid grid-cols-4 gap-4 w-full">
+                                <div class="bg-slate-50 border-t-4 border-blue-500 p-4 rounded-xl shadow-xs space-y-2">
+                                    <div class="font-bold text-blue-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-shuffle"></i> 1. Control de Cambios</div>
+                                    <p class="text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-100">Comité CCB (SEDAPAL, Supervisor, Contrata) para evaluar impactos económicos y de plazo.</p>
+                                </div>
+                                <div class="bg-slate-50 border-t-4 border-emerald-500 p-4 rounded-xl shadow-xs space-y-2">
+                                    <div class="font-bold text-emerald-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-award"></i> 2. Aseguramiento QA</div>
+                                    <p class="text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-100">Checklists de zanjas, auditorías de procesos y pruebas hidráulicas preventivas.</p>
+                                </div>
+                                <div class="bg-slate-50 border-t-4 border-amber-500 p-4 rounded-xl shadow-xs space-y-2">
+                                    <div class="font-bold text-amber-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-brain"></i> 3. Conocimiento e IA</div>
+                                    <p class="text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-100">Lecciones aprendidas continuas y automatización de reportes mediante IA.</p>
+                                </div>
+                                <div class="bg-slate-50 border-t-4 border-purple-500 p-4 rounded-xl shadow-xs space-y-2">
+                                    <div class="font-bold text-purple-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-sliders"></i> 4. Adaptación Tailoring</div>
+                                    <p class="text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-100">Enfoque predictivo adaptado a la complejidad de saneamiento urbano masivo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800/60', 'hover:text-slate-200');
+            });
+
+            document.getElementById('tab-' + tabId).classList.add('active');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800/60', 'hover:text-slate-200');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+        }
+
+        function calcularFlujoCambio() {
+            const monto = parseFloat(document.getElementById('montoCambioInput').value);
+            const box = document.getElementById('boxRespuestaCambio');
+            const presupuestoTotal = 2143041372;
+            const umbralPM = presupuestoTotal * 0.01; // 1% umbral de ejemplo
+
+            if (isNaN(monto) || monto <= 0) {
+                box.className = "p-4 bg-slate-50 text-slate-600 rounded-xl text-xs flex items-start gap-2 border border-slate-200";
+                box.innerHTML = `<i class="fa-solid fa-circle-info mt-0.5"></i> <div>Introduce un monto válido.</div>`;
+                return;
+            }
+
+            if (monto <= 50000) {
+                box.className = "p-4 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-xl text-xs space-y-1.5";
+                box.innerHTML = `
+                    <div class="flex items-center gap-2 font-bold text-emerald-800 text-sm">
+                        <i class="fa-solid fa-circle-check"></i> Nivel Operativo: Aprobación del Residente / PM
+                    </div>
+                    <p class="leading-relaxed">El impacto de <strong>S/. ${monto.toLocaleString('es-PE')}</strong> es menor y se resuelve con ajustes directos en partidas menores, registrándose en el control semanal.</p>
+                `;
+            } else {
+                box.className = "p-4 bg-rose-50 text-rose-900 border border-rose-200 rounded-xl text-xs space-y-1.5";
+                box.innerHTML = `
+                    <div class="flex items-center gap-2 font-bold text-rose-800 text-sm">
+                        <i class="fa-solid fa-circle-xmark"></i> Nivel Estratégico: Escalamiento al CCB (SEDAPAL y Supervisor)
+                    </div>
+                    <p class="leading-relaxed">El impacto de <strong>S/. ${monto.toLocaleString('es-PE')}</strong> altera significativamente la línea base financiera o cronograma, requiriendo acta formal del Comité de Control de Cambios.</p>
+                `;
+            }
+        }
+
+        window.onload = function() {
+            calcularFlujoCambio();
+
+            const ctxFinanzas = document.getElementById('chartFinanzas').getContext('2d');
+            new Chart(ctxFinanzas, {
+                type: 'bar',
+                data: {
+                    labels: ['Obras Civiles', 'Líneas Agua Potable', 'Redes Alcantarillado', 'Equipamiento', 'Mitigación y SSOMA'],
+                    datasets: [{
+                        label: 'Presupuesto por Componente (S/.)',
+                        data: [1200000000, 350000000, 420000000, 100000000, 73041372],
+                        backgroundColor: '#2563eb',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { ticks: { callback: val => 'S/ ' + (val/1000000).toFixed(0) + 'M' }, grid: { color: '#f1f5f9' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
